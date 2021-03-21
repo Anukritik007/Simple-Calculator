@@ -1,13 +1,13 @@
-.container {
+.calculator {
     height: 100vh;
     text-align: center;
 
 }
 
-.theme-light.container {
+.theme-light.calculator {
     background: #ffffff;
 }
 
-.theme-dark.container {
+.theme-dark.calculator {
     background: #000000;
 }

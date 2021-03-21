@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import CalculatorDisplay from "./components/CalculatorDisplay/CalculatorDisplay";
 import CalculatorInputs from "./components/CalculatorInputs/CalculatorInputs";
 import Header from "./components/Header/Header";
-import * as Utils from "./Container.utils";
+import * as Utils from "./CalculatorUtils";
 import themeContext from "./ThemeContext";
-import "./Container.css";
+import "./Calculator.css";
 
-const Container = () => {
+const Calculator = () => {
   const [equation, setEquation] = useState({
     operand1: "",
     operator: "",
@@ -24,6 +24,10 @@ const Container = () => {
   const op2 = equation.operand2;
   const opr = equation.operator;
 
+  /**
+   * Triggers on Click of calculator buttons to evaluation the equation and show intermediate results
+   * @param {*} button
+   */
   const onClick = (button) => {
     if (button.type === "digit") {
       _handleDigit(button);
@@ -45,7 +49,13 @@ const Container = () => {
   };
 
   const _handleDigit = (button) => {
-    if (opr === "=") {
+    //Reset operand 1 to clicked value in case of Unary operators(Scientific in our case)
+    if (
+      opr === "=" ||
+      opr === "Sign" ||
+      opr === "Square" ||
+      opr === "Square root"
+    ) {
       const newOp1 = button.name;
       setEquation({
         ...equation,
@@ -67,10 +77,10 @@ const Container = () => {
   };
 
   const _handleOperator = (button) => {
-    //set operator only given if operand 1 exists
+    //set binary operator only if operand 1 exists
     if (
       (op1 !== "" && opr === "") ||
-      (op1 !== "" && opr !== "" && op2 === "") //overwrite operator, continue calc after =
+      (op1 !== "" && opr !== "" && op2 === "") //overwrite operator if already present
     ) {
       setEquation({ ...equation, operator: button.name });
     }
@@ -87,6 +97,7 @@ const Container = () => {
   };
 
   const _handleScientificOperator = (button) => {
+    //set the unary(scientific) operator
     const newEquation = { ...equation, operator: button.name };
     let intermediateResult = Utils.evaluateEquation(newEquation);
 
@@ -111,7 +122,7 @@ const Container = () => {
   return (
     <themeContext.Provider value={themeContextValue}>
       <div
-        className={`container ${isThemeDark ? "theme-dark" : "theme-light"}`}
+        className={`calculator ${isThemeDark ? "theme-dark" : "theme-light"}`}
       >
         <Header
           showScientific={showScientific}
@@ -125,4 +136,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default Calculator;

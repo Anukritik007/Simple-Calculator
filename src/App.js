@@ -1,10 +1,10 @@
 import "./App.css";
-import Container from "./container/Container";
+import Calculator from "./Calculator/Calculator";
 
 const App = () => {
   return (
     <div className="App">
-      <Container />
+      <Calculator />
     </div>
   );
 };
