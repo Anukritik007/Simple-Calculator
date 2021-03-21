@@ -1,0 +1,33 @@
+.grid {
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    grid-column-gap: 10px;
+    row-gap: 10px;
+}
+
+.scientific-grid {
+    height: 200px;
+    width: 300px;
+    padding-top: 0;
+}
+
+.normal-buttons {
+    grid-template: repeat(4, 1fr)/repeat(4, 1fr);
+}
+
+.scientific-buttons {
+    grid-template: 60px/repeat(3, 1fr);
+}
+
+.theme-dark .calculatorInputs button {
+    background: #666;
+    color: #fff;
+}
+
+.theme-light .calculatorInputs button {
+    background: #f0f0f0;
+    color: #000;
+}
