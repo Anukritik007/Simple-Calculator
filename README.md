@@ -1,8 +1,8 @@
 # How to run
-1.Clone this repository
-2.`cd Simple-Calculator`
-3.Run `npm install` or `yarn install`
-4.Run `npm start` or `yarn start`
+1. Clone this repository
+2. `cd Simple-Calculator`
+3. Run `npm install` or `yarn install`
+4. Run `npm start` or `yarn start`
 
 ## Screenshots:
 ### Dark mode:
