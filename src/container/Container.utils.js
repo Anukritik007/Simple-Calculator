@@ -1,5 +1,5 @@
-export const evaluateEquation = (equation, result) => {
-  const { operand1, operator, operand2 } = equation;
+export const evaluateEquation = (equation) => {
+  const { operand1, operator, operand2, result } = equation;
   let res = 0;
   const op1 = Number(operand1),
     op2 = Number(operand2);

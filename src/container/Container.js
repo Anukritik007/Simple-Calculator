@@ -5,12 +5,13 @@ import Header from "./components/Header/Header";
 import * as Utils from "./Container.utils";
 
 const Container = () => {
-  const [result, setResult] = useState(0);
   const [equation, setEquation] = useState({
     operand1: "",
     operator: "",
     operand2: "",
+    result: 0,
   });
+  const [showScientific, setMode] = useState(false);
 
   const op1 = equation.operand1;
   const op2 = equation.operand2;
@@ -21,15 +22,17 @@ const Container = () => {
       _handleDigit(button);
     } else if (button.type === "operator") {
       _handleOperator(button);
+    } else if (button.type === "scientific_operator") {
+      _handleScientificOperator(button);
     } else if (button.type === "equals") {
       _handleEquals(button);
     } else {
       //clear
-      setResult(0);
       setEquation({
         operand1: "",
         operator: "",
         operand2: "",
+        result: 0,
       });
     }
   };
@@ -37,20 +40,22 @@ const Container = () => {
   const _handleDigit = (button) => {
     if (opr === "=") {
       const newOp1 = button.name;
-      setEquation({ ...equation, operand1: newOp1, operator: "" });
-      setResult(newOp1);
+      setEquation({
+        ...equation,
+        operand1: newOp1,
+        operator: "",
+        result: newOp1,
+      });
     }
     //set operand 1
     else if (opr === "") {
       const newOp1 = op1 + button.name;
-      setEquation({ ...equation, operand1: newOp1 });
-      setResult(newOp1);
+      setEquation({ ...equation, operand1: newOp1, result: newOp1 });
     }
     //set operand 2
     else {
       const newOp2 = op2 + button.name;
-      setEquation({ ...equation, operand2: newOp2 });
-      setResult(newOp2);
+      setEquation({ ...equation, operand2: newOp2, result: newOp2 });
     }
   };
 
@@ -64,32 +69,46 @@ const Container = () => {
     }
     //return intermediate result
     else if (op1 !== "" && opr !== "" && op2 !== "") {
-      let intermediateResult = Utils.evaluateEquation(equation, result);
-      setResult(intermediateResult);
+      let intermediateResult = Utils.evaluateEquation(equation);
       setEquation({
         operand1: intermediateResult,
         operator: button.name,
         operand2: "",
+        result: intermediateResult,
       });
     }
   };
+  const _handleScientificOperator = (button) => {
+    const newEquation = { ...equation, operator: button.name };
+    let intermediateResult = Utils.evaluateEquation(newEquation);
+
+    setEquation({
+      ...newEquation,
+      operand1: intermediateResult,
+      operand2: "",
+      result: intermediateResult,
+    });
+  };
 
   const _handleEquals = () => {
-    let intermediateResult = Utils.evaluateEquation(equation, result);
-    setResult(intermediateResult);
+    let intermediateResult = Utils.evaluateEquation(equation);
     setEquation({
       operand1: intermediateResult,
       operator: "=",
       operand2: "",
+      result: intermediateResult,
     });
   };
 
   return (
     <div className="container">
-      <Header />
-      <CalculatorDisplay result={result} />
+      <Header
+        showScientific={showScientific}
+        toggleMode={() => setMode(!showScientific)}
+      />
+      <CalculatorDisplay result={equation.result} />
 
-      <CalculatorInputs onClick={onClick} />
+      <CalculatorInputs onClick={onClick} showScientific={showScientific} />
     </div>
   );
 };

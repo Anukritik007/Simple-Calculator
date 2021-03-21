@@ -14,7 +14,6 @@ export const calculatorButtons = [
     name: "3",
     displayName: "3",
   },
-
   {
     type: "operator",
     name: "Add",
@@ -80,5 +79,23 @@ export const calculatorButtons = [
     type: "operator",
     name: "Divide",
     displayName: "Divide (/)",
+  },
+];
+
+export const scientificButtons = [
+  {
+    type: "scientific_operator",
+    name: "Sign",
+    displayName: "Sign (!)",
+  },
+  {
+    type: "scientific_operator",
+    name: "Square",
+    displayName: "Square (^2)",
+  },
+  {
+    type: "scientific_operator",
+    name: "Square root",
+    displayName: "Square root(^(1/2))",
   },
 ];
