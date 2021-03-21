@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../Button/Button";
 import "./Header.css";
+import themeContext from "../../ThemeContext";
 import { buttonName } from "./Header.constants";
 
-const Header = ({ showScientific, toggleMode, toggleTheme, isThemeDark }) => {
+const Header = ({ showScientific, toggleMode }) => {
+  const { isThemeDark, toggleTheme } = useContext(themeContext);
+
   return (
     <div className="header">
       <h3>Calculator</h3>
@@ -18,6 +21,7 @@ const Header = ({ showScientific, toggleMode, toggleTheme, isThemeDark }) => {
           onClick={toggleTheme}
           disabled={isThemeDark}
         />
+
         <Button
           displayName={
             showScientific ? buttonName.normal : buttonName.scientific

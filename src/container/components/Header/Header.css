@@ -8,3 +8,25 @@
     display: flex;
     justify-content: space-around;
 }
+
+.theme-dark .header button {
+    background: #666;
+    color: #fff;
+}
+
+.theme-light .header button {
+    background: #f0f0f0;
+    color: #000;
+}
+
+.theme-dark .header {
+    border-bottom: 2px solid white;
+}
+
+.theme-light .header {
+    border-bottom: 2px solid black;
+}
+
+.theme-dark h3 {
+    color: #fff;
+}

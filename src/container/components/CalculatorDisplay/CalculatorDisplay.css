@@ -8,3 +8,13 @@
     box-sizing: border-box;
     margin-top: 20px;
 }
+
+.theme-dark .result-display {
+    background: #666;
+    color: #fff;
+}
+
+.theme-light .result-display {
+    background: #f0f0f0;
+    color: #000;
+}

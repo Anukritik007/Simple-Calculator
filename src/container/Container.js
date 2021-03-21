@@ -3,6 +3,8 @@ import CalculatorDisplay from "./components/CalculatorDisplay/CalculatorDisplay"
 import CalculatorInputs from "./components/CalculatorInputs/CalculatorInputs";
 import Header from "./components/Header/Header";
 import * as Utils from "./Container.utils";
+import themeContext from "./ThemeContext";
+import "./Container.css";
 
 const Container = () => {
   const [equation, setEquation] = useState({
@@ -12,7 +14,12 @@ const Container = () => {
     result: 0,
   });
   const [showScientific, setMode] = useState(false);
+  const [isThemeDark, setThemeDark] = useState(false);
 
+  const themeContextValue = {
+    isThemeDark,
+    toggleTheme: () => setThemeDark(!isThemeDark),
+  };
   const op1 = equation.operand1;
   const op2 = equation.operand2;
   const opr = equation.operator;
@@ -78,6 +85,7 @@ const Container = () => {
       });
     }
   };
+
   const _handleScientificOperator = (button) => {
     const newEquation = { ...equation, operator: button.name };
     let intermediateResult = Utils.evaluateEquation(newEquation);
@@ -101,15 +109,19 @@ const Container = () => {
   };
 
   return (
-    <div className="container">
-      <Header
-        showScientific={showScientific}
-        toggleMode={() => setMode(!showScientific)}
-      />
-      <CalculatorDisplay result={equation.result} />
+    <themeContext.Provider value={themeContextValue}>
+      <div
+        className={`container ${isThemeDark ? "theme-dark" : "theme-light"}`}
+      >
+        <Header
+          showScientific={showScientific}
+          toggleMode={() => setMode(!showScientific)}
+        />
+        <CalculatorDisplay result={equation.result} />
 
-      <CalculatorInputs onClick={onClick} showScientific={showScientific} />
-    </div>
+        <CalculatorInputs onClick={onClick} showScientific={showScientific} />
+      </div>
+    </themeContext.Provider>
   );
 };
 

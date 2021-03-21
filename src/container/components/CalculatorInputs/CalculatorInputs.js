@@ -7,13 +7,9 @@ import {
   scientificButtons,
 } from "./CalculatorInputs.constants";
 
-const CalculatorInputs = ({ onClick, showScientific, isThemeDark }) => {
+const CalculatorInputs = ({ onClick, showScientific }) => {
   return (
-    <div
-      className={`calculatorInputs ${
-        isThemeDark ? "theme-dark" : "theme-light"
-      }`}
-    >
+    <div className="calculatorInputs">
       <div className="normal-buttons grid">
         {calculatorButtons.map((button, index) => {
           return (

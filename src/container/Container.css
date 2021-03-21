@@ -1,4 +1,13 @@
 .container {
     height: 100vh;
     text-align: center;
+
+}
+
+.theme-light.container {
+    background: #ffffff;
+}
+
+.theme-dark.container {
+    background: #000000;
 }
